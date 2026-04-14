@@ -2,6 +2,8 @@
 {
     public class Student
     {
+        private IList<Subscription> _subscriptions;
+
         public Student(string lastName, string document, string email, string firstName, object? address)
         {
             LastName = lastName;
@@ -9,6 +11,7 @@
             Email = email;
             FirstName = firstName;
             Address = address;
+            _subscriptions = new List<Subscription>();
         }
 
         public string LastName { get; set; }
@@ -16,14 +19,14 @@
         public string Email { get; set; }
         public string FirstName { get; set; }
         public object Address { get; }
-        public List<Subscription> Subscriptions { get; set; }
+        public IReadOnlyCollection<Subscription> Subscriptions { get => _subscriptions.ToArray(); }
 
         public void AddSubscription(Subscription subscription)
         {
-            var hasActiveSubscription = Subscriptions.Any(s => s.Active);
-            if (hasActiveSubscription)
-                throw new Exception("You already have an active subscription.");
-            Subscriptions.Add(subscription);
+            foreach (var sub in Subscriptions)
+                sub.ActiveSubscription();
+
+            _subscriptions.Add(subscription);
         }
     }
 }
