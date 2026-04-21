@@ -14,6 +14,8 @@ namespace PaymentContext.Domain.Entities
             Email = email;
             Address = address;
             _subscriptions = new List<Subscription>();
+
+            AddNotifications(name, document, email);
         }
 
         public Name Name { get; private set; }
@@ -24,10 +26,18 @@ namespace PaymentContext.Domain.Entities
 
         public void AddSubscription(Subscription subscription)
         {
-            foreach (var sub in Subscriptions)
-                sub.ActiveSubscription();
+            var hasSubscriptionsActive = false;
 
-            _subscriptions.Add(subscription);
+            foreach (var sub in Subscriptions)
+            {
+                if (sub.Active)
+                    hasSubscriptionsActive = true;
+            }
+
+            if (hasSubscriptionsActive)
+                AddNotification("Student.Subscriptions", "Você já tem uma assinatura ativa");
+            else
+                _subscriptions.Add(subscription);
         }
     }
 }
