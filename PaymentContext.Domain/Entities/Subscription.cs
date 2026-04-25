@@ -3,7 +3,7 @@
     public class Subscription
     {
         private IList<Payment> _payments;
-        public Subscription(DateTime? expireDate, List<Payment> payments)
+        public Subscription(DateTime? expireDate)
         {
             CreateDate = DateTime.Now;
             LastUpdateDate = DateTime.Now;
@@ -16,7 +16,7 @@
         public DateTime LastUpdateDate { get; private set; }
         public DateTime? ExpireDate { get; private set; }
         public bool Active { get; private set; }
-        public IReadOnlyCollection<Payment> Payments { get => _payments.ToList().AsReadOnly(); }
+        public IReadOnlyCollection<Payment> Payments { get => _payments.ToArray(); }
 
         public void AddPayment(Payment payment)
         {

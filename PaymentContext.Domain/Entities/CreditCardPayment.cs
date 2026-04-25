@@ -12,8 +12,9 @@ namespace PaymentContext.Domain.Entities
             decimal total, 
             decimal totalPaid, 
             Address address, 
-            Document document, 
-            string payer) : base(paidDate, expireDate, total, totalPaid, address, document, payer)
+            Document document,
+            Email email,
+            string payer) : base(paidDate, expireDate, total, totalPaid, address, document, payer, email)
         {
             CardHolderName = cardHolderName;
             CardNumber = cardNumber;

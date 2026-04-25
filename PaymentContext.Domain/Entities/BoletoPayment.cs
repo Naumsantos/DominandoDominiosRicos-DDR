@@ -12,14 +12,16 @@ namespace PaymentContext.Domain.Entities
                              decimal totalPaid, 
                              Address address, 
                              Document document, 
-                             string payer) : base(
+                             string payer,
+                             Email email) : base(
                                  paidDate, 
                                  expireDate, 
                                  total, 
                                  totalPaid, 
                                  address, 
                                  document, 
-                                 payer)
+                                 payer,
+                                 email)
         {
             BarCode = barCode;
             BoletoNumber = boletoNumber;
